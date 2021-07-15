@@ -44,19 +44,14 @@ namespace Esercizio6
             {
                 String nome = Console.ReadLine();
                 Console.WriteLine($"Ok {nome}, iniziamo a giocare!\n");
-                Console.WriteLine("-----------------Menu----------------");
-                Console.WriteLine("\n1) Gioca," +
-                                  "\n2)Esci");
 
-                int scelta = int.Parse(Console.ReadLine());
-
-
-              
+                int scelta = 0;
+                Menu(ref scelta);
+                
                 int result = 0;
                 int num = 0;
 
                 Random rand = new Random();
-
 
 
                 switch (scelta)
@@ -64,7 +59,7 @@ namespace Esercizio6
                     case 1:
                       
                         Gioco(ref tentativo, ref rand, ref result);
-                        Scelta(ref num, ref result);
+                        Scelta(ref num, ref result, ref scelta);
                         if (num != 0)
                         {
                             Verifica(ref num, ref result, ref nome);
@@ -85,6 +80,16 @@ namespace Esercizio6
                 continua = Console.ReadKey().KeyChar;
 
             } while (continua == 's' || continua == 'S');
+        }
+
+        private static void Menu(ref int scelta)
+        {
+            Console.WriteLine("-----------------Menu----------------");
+            Console.WriteLine("\n1)Gioca," +
+                              "\n2)Esci");
+
+            scelta = int.Parse(Console.ReadLine());
+
         }
 
         private static void Esci()
@@ -111,7 +116,7 @@ namespace Esercizio6
             }
         }
 
-        private static void Scelta(ref int num, ref int result)
+        private static void Scelta(ref int num, ref int result, ref int scelta)
         {
             do
             {
@@ -125,7 +130,7 @@ namespace Esercizio6
                 Console.WriteLine("\nPartita interrotta!");
                 Console.WriteLine($"\nEra stato generato il numero: {result}");
                 Console.WriteLine("\n-----------------------------------");
-
+                Menu(ref scelta);
             }
             else
             {
